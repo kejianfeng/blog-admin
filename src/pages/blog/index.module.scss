@@ -1,0 +1,74 @@
+
+.blog {
+  .edit_area {
+    width: 60%;
+    .text_area {
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .opreate_area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .option {
+        .option_unit {
+          position: relative;
+          display: inline-block;
+          color: #007fff;
+          font-size: 14px;
+          margin-right: 10px;
+          cursor: pointer;
+          .icon {
+            display: inline-block;
+            padding-right: 5px;
+          }
+          .upload {
+            position: absolute;
+            width: 50px;
+            height: 20px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            opacity: 0;
+            cursor: pointer;
+          }
+        }
+      }
+      .submit_btn {
+
+      }
+    }
+  }
+}
+
+.blog_item {
+  color: #333;
+  font-size: 14px;
+  width: 500px;
+  .blog_content {
+    margin: 10px 0  ;
+  }
+  .pic {
+    width: 300px;
+    margin: 20px 0;
+    img {
+      width: 100%;
+    }
+  }
+  .labels {
+    span {
+      display: inline-block;
+      padding:1px 10px;
+      font-size: 12px;
+      border-radius: 10px;
+      background: #828d95;
+      margin-right: 10px;
+      color: #fff;
+    }
+  }
+}
+.title {
+  margin: 10px 0;
+}

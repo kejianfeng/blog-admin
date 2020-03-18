@@ -1,0 +1,25 @@
+
+.main {
+  // width: 100%;
+  // background-color: #fff;
+  margin: 0 auto;
+  // background: @component-background;
+  .table {
+  }
+}
+.operate {
+  display: flex;
+  justify-content: space-between;
+  .search {
+    min-width: 300px;
+    // width: 500px !important;
+  }
+
+}
+:global {
+  .ant-pro-basicLayout-content,
+  .ant-pro-page-header-wrap{
+  margin: 0 !important;
+}
+}
+

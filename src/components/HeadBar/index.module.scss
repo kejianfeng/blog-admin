@@ -1,0 +1,31 @@
+.head_bar {
+  // width: 100%;
+  height: 80px;
+  background: #132332;
+  display: flex;
+  justify-content: space-between;
+  // text-align: right;
+  line-height: 80px;
+  padding: 0 30px;
+  .logo {
+    width: 160px;
+    img {
+      vertical-align: middle;
+      width: 100%;
+    }
+  }
+  .user_info {
+    display: inline-block;
+    color: #fff;
+    cursor: pointer;
+
+  }
+}
+.logOut {
+  display: inline-block;
+  width: 50px;
+  color: #132332;
+  text-align: center;
+  background-color: #fff;
+  cursor: pointer;
+}
