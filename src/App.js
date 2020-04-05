@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss";
-import {BrowserRouter as Router , withRouter} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import Layout from "./layout/index";
 
 function App() {
@@ -13,4 +13,4 @@ function App() {
   );
 }
 
-export default withRouter(App);
+export default App;

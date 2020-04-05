@@ -19,25 +19,21 @@ class Blog extends Component {
     uploading: false
   };
 
-  handleUpload = () => {
+  handleUpload = ({file}) => {
+    console.log(file)
     console.log(22222);
-    const { fileList } = this.state;
-    console.log(this.state);
-    const formData = new FormData();
-    fileList.forEach(file => {
-      formData.append("files", file);
-    });
+    // const { fileList } = this.state;
+    // console.log(this.state);
+    // const formData = new FormData();
+    // fileList.forEach(file => {
+    //   formData.append("files", file);
+    // });
 
-    this.setState({
-      uploading: true
-    });
+    // this.setState({
+    //   uploading: true
+    // });
 
-    request("/api/uploadPic", {
-      method: "post",
-      data: {
-        pic: "aaaaa"
-      }
-    }).then(res => {
+    request("/upload", 'post', file).then(res => {
       console.log(res);
     });
   };
@@ -74,7 +70,6 @@ class Blog extends Component {
                   <Button
                     className={styles.submit_btn}
                     type="primary"
-                    onClick={this.handleUpload}
                   >
                     提交
                   </Button>
@@ -84,8 +79,9 @@ class Blog extends Component {
                   beforeUpload={this.beforeUpload}
                   fileList={this.state.fileList}
                 >
-                  <Button>Click to Upload</Button>
+                  <Button>点击上传图片</Button>
                 </Upload>
+                <img src='https://jamki.oss-cn-shenzhen.aliyuncs.com/independent-dwz.png?Expires=1586021952&OSSAccessKeyId=TMP.3Kk7dczQZ1dqDXVcX1Fmx2cKV92f19BHm6Dr3JUtn9D4UYQNyxKUMW7pvsFtWY5gZwKptw9PAt4169WJEcQkmaMCWk7nhk&Signature=gyjEMgrv%2FSHctz%2BDmzkSAcmp1Lw%3D' alt="."/>
               </div>
             </div>
           </div>

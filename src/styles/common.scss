@@ -45,3 +45,12 @@ $mcolor: #828d95;
   color: #aaa;
   margin-right: 10px;
 }
+
+.bf-container {
+  width: 900px;
+  height: auto;
+  margin: 0 auto;
+  .DraftEditor-editorContainer {
+    border: 1px solid #eee !important; 
+  }
+}

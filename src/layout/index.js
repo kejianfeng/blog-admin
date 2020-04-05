@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./index.module.scss";
 import { BrowserRouter as Router, Route, Switch,withRouter} from "react-router-dom";
 import article from '../pages/article/articleList/index';
+import articleEdit from '../pages/article/edit/index';
 import blog from '../pages/blog/index';
 import contact from '../pages/contact/index';
 import picture from '../pages/picture/index';
@@ -25,12 +26,13 @@ class Layout extends Component {
         <div className={styles.main_box}>
             <Switch>
               <Route exact  path="/"  component={article}/>
-              <Route path="/article"  component={article}/>
+              <Route exact path="/article"  component={article}/>
               <Route  path="/blog" component={blog}></Route >
               <Route  path="/contact" component={contact}></Route >
               <Route  path="/picture" component={picture}></Route >
               <Route  path="/site" component={site}></Route >
               <Route  path="/source" component={source}></Route >
+              <Route  path="/article/edit" component={articleEdit}></Route >
             </Switch>
         </div>
       </div>

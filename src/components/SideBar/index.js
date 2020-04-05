@@ -12,7 +12,6 @@ class SideBar extends Component {
   componentDidMount() {}
   render() {
     return (
-      <Router>
         <div className={styles.sidebar_box}>
         <Menu
           onClick={this.handleClick}
@@ -39,7 +38,6 @@ class SideBar extends Component {
           </Menu.Item>
         </Menu>
       </div>
-      </Router>
     );
   }
 }

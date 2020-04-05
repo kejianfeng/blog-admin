@@ -1,10 +1,10 @@
 // import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import React, { Fragment, Component } from 'react';
-import { Form, Input, Icon, Select, Checkbox, Button } from 'antd';
-import ReactQuill from 'react-quill'; // ES6
-import {modules, formats} from '../../../../config/editorConfig';
-import styles from './index.less';
-import 'react-quill/dist/quill.snow.css'; // ES6
+import React, { Component } from 'react';
+import { Form, Input, Button } from 'antd';
+import {ArrowLeftOutlined} from '@ant-design/icons'
+import RichText from "../../../components/RichText/index";
+// import {modules, formats} from '../../../../config/editorConfig';
+import styles from './index.module.scss';
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -12,95 +12,77 @@ const formItemLayout = {
   wrapperCol: { span: 12 },
 };
 
-const formItemEditorLayout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 20 },
-};
-
-// const { Search } = Input;
-const formMap = {
-  // onValuesChange(_, changeVal, allVals) {
-  //   console.log('当前元素', changeVal);
-  //   console.log('所有元素', allVals);
-  // },
-
-};
-
 class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      articleContent: '',
+      articleContent: '我是剑烽',
+      initContent: '' //预设值
     };
-    this.handleChangeArticle = this.handleChangeArticle.bind(this);
-    this.submitForm = this.submitForm.bind(this)
+    this.contentUpdate = this.contentUpdate.bind(this);
   }
 
-  handleChangeArticle(value) {
+  contentUpdate(value) { //文章内容改变
     this.setState({
       articleContent: value,
     });
   }
-
-  submitForm() {
-    const {validateFields} =  this.props.form
-    validateFields((err, values) => {
-      if (err) {
-        console.log('检验出错', err)
-      }else {
-        Object.assign({}, values, {
-            articleContent: this.state.articleContent
-          })
-      }
-    })
+  formSubmit(value) {
+    const params = Object.assign({}, value, {mainBody:this.state.articleContent})
+    console.log('啦啦啦啦', params)
   }
-
   render() {
-    const { getFieldDecorator } = this.props.form;
+    // const { getFieldDecorator } = this.props.form;
     return (
       <div className="container-a">
+         <div className="section">
+           <div className={styles.back}>
+             <ArrowLeftOutlined className={styles.arrow} onClick={() => {
+                  this.props.history.push("/article");
+                }}/>
+              文章编辑
+           </div>
+           
+         </div>
+        <div className="section">
         <div className={styles.edit_wrap}>
-          <Form>
-            <FormItem label="文章标题" {...formItemLayout}>
-              {getFieldDecorator('title', {
-                rules: [{ required: true, message: '输入标题啊' }],
-              })(<Input />)}
+          <Form onFinish={this.formSubmit.bind(this)}>
+            <FormItem label="文章标题" name="title" {...formItemLayout}
+              rules={[{ required: true, message: '输入标题啊' }]}
+            >
+            <Input />
             </FormItem>
-            <FormItem label="文章主题" {...formItemLayout}>
-              {getFieldDecorator('topic', {
-                rules: [{ required: true, message: '输入标题啊' }],
-              })(<Input />)}
+            <FormItem label="文章主题" name="topic" {...formItemLayout}
+              rules={[{ required: true, message: '输入标题啊' }]}
+            >
+            <Input />
             </FormItem>
-            <FormItem label="文章标签" {...formItemLayout}>
-              {getFieldDecorator('labels', {
-                rules: [{ required: true, message: '输入标题啊' }],
-              })(<Input />)}
+            <FormItem label="文章摘要" name="summary" {...formItemLayout}
+              rules={[{ required: true, message: '输入标题啊' }]}
+            >
+            <Input />
             </FormItem>
-            <FormItem label="文章摘要" {...formItemLayout}>
-              {getFieldDecorator('summary', {
-                rules: [{ required: true, message: '输入标题啊' }],
-              })(<Input />)}
+            <FormItem label="文章标签" name="lables" {...formItemLayout}
+              rules={[{ required: true, message: '输入标题啊' }]}
+            >
+            <Input />
             </FormItem>
-            <FormItem label="文章内容" {...formItemEditorLayout}>
-              <ReactQuill
-                theme="snow"
-                value={this.state.articleContent}
-                onChange={this.handleChangeArticle}
-                modules={modules}
-                formats={formats}
-                // {...editorConfig}
-              ></ReactQuill>
+            <FormItem label="文章内容" name="mainBody" {...formItemLayout}
+            >
+            <RichText articleContent={this.state.articleContent} contentUpdate={this.contentUpdate} defaultContent={this.state.initContent}/>
             </FormItem>
             <FormItem wrapperCol={{ span: 12, offset: 3 }}>
-              <Button type="primary" htmlType="submit" onClick={this.submitForm}>
+              <Button type="primary" htmlType="submit">
                 提交
               </Button>
             </FormItem>
           </Form>
+        </div>
         </div>
       </div>
     );
   }
 }
 
-export default Form.create(formMap)(Edit);
+export default Edit;
+// export default Edit
