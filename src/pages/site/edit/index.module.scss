@@ -1,0 +1,16 @@
+.back {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  .arrow {
+    padding-right: 10px;
+    cursor: pointer;
+  }
+}
+
+.picPreview {
+  width: 500px;
+  margin: 20px 0;
+  img {
+    width: 100%;
+  }
+}

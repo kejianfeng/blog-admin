@@ -6,8 +6,10 @@ import articleEdit from '../pages/article/edit/index';
 import blog from '../pages/blog/index';
 import contact from '../pages/contact/index';
 import picture from '../pages/picture/index';
-import site from '../pages/site/index';
-import source from '../pages/source/index';
+import site from '../pages/site/siteList/index';
+import siteEdit from '../pages/site/edit/index';
+import source from '../pages/source/sourceList/index';
+import sourceEdit from '../pages/source/edit/index';
 import HeadBar from "../components/HeadBar";
 import SideBar from "../components/SideBar";
 
@@ -30,9 +32,11 @@ class Layout extends Component {
               <Route  path="/blog" component={blog}></Route >
               <Route  path="/contact" component={contact}></Route >
               <Route  path="/picture" component={picture}></Route >
-              <Route  path="/site" component={site}></Route >
-              <Route  path="/source" component={source}></Route >
+              <Route exact path="/site" component={site}></Route >
+              <Route exact path="/source" component={source}></Route >
+              <Route  path="/source/edit" component={sourceEdit}></Route >
               <Route  path="/article/edit" component={articleEdit}></Route >
+              <Route  path="/site/edit" component={siteEdit}></Route >
             </Switch>
         </div>
       </div>

@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Table, Divider, Tag } from 'antd';
 import styles from './index.module.scss';
+import { withRouter } from "react-router-dom";
+
+// import request from "../../../utils/request";
+
 
 const columns = [
   {
@@ -20,38 +24,36 @@ const columns = [
     dataIndex: 'labels',
     render: labels => (
       <span>
-        {labels.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-
+        {
+        labels.map( tag=> {
+          let color = 'geekblue'
           return (
             <Tag color={color} key={tag}>
               {tag.toUpperCase()}
             </Tag>
           );
-        })}
+        })
+        }
       </span>
     ),
   },
   {
     title: '阅读量',
-    dataIndex: 'clickNum',
-    key: 'clickNum',
+    dataIndex: 'clickSum',
+    key: 'clickSum',
   },
   {
     title: '评论数量',
-    dataIndex: 'commentNum',
-    key: 'commentNum',
+    dataIndex: 'commentSum',
+    key: 'commentSum',
   },
   {
     title: '操作',
     key: 'action',
-    render: (text, record) => (
+    dataIndex: 'action',
+    render: (val, row) => (  //当前行的值text||当前行数据||行索引
       <span>
-        <span>修改 {record.name}</span>
+        <span onClick={(e) => modify(row.id)} style={{'cursor': 'pointer'}}>修改 {row.name}</span>
         <Divider type="vertical" />
         <span>删除</span>
         <Divider type="vertical" />
@@ -59,36 +61,33 @@ const columns = [
       </span>
     ),
   },
-];
-const data = [
-  {
-    key: '1',
-    title: 'V8技术啊啊啊',
-    topic: '生命',
-    labels: ['nice', 'developer'],
-    clickNum: 68,
-    commentNum:89,
+]; 
 
-  },
-  // {
-  //   key: '2',
-  //   name: 'Jim Green',
-  //   age: 42,
-  //   address: 'London No. 1 Lake Park',
-  //   labels: ['loser'],
-  // },
-  // {
-  //   key: '3',
-  //   name: 'Joe Black',
-  //   age: 32,
-  //   address: 'Sidney No. 1 Lake Park',
-  //   labels: ['cool', 'teacher'],
-  // },
-];
-export default () => (
-  <div className={styles.container}>
+function modify(id) {
+  this.props.history.push({
+    pathname: '/article/edit',
+    state:{
+      id
+    }
+  })
+  console.log(this)
+}
+class TableBasic extends Component {
+  constructor(props) {
+    super(props)
+    // eslint-disable-next-line no-func-assign
+    modify = modify.bind(this)
+  }
+  modify = modify.bind(this)
+  render() {
+    return (
+      <div className={styles.container}>
     <div id="components-table-demo-basic">
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={this.props.articleList} />
     </div>
   </div>
-);
+    )
+  }
+}
+
+export default withRouter(TableBasic)
