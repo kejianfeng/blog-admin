@@ -17,18 +17,13 @@ class Blog extends Component {
     this.mainBodyChange = this.mainBodyChange.bind(this);
     this.labelChange = this.labelChange.bind(this);
     this.submitBlog = this.submitBlog.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
   componentDidMount() {
     this.getList();
   }
   async getList() {
     const result = await request("/blog/blogList", "get");
-    // const data = result.data.map( item =>{
-    //   item.labels = item.labels.split(',')
-    //   item.key = item.id
-    //   return item
-    // })
-    console.log('呀呀呀呀呀呀', result.data);
     this.setState({
       articleList: result.data,
     });
@@ -74,7 +69,16 @@ class Blog extends Component {
     };
     await request("/blog/add", "post", blogData);
     message.success("发布成功");
-    this.getList()
+    window.location.reload()
+  }
+  async deleteItem(id) {
+    const result = await request('/admin/blog/delete', 'post', {
+      id
+    })
+    if (result.code === 200) {
+      message.success(`已删除`)
+      this.getList()
+    }
   }
 
   render() {
@@ -134,7 +138,7 @@ class Blog extends Component {
               {this.state.articleList.map((item) => (
                 <Timeline.Item key={item.id}>
                   <div className={styles.blog_item}>
-                    <div className={styles.date}>{item.createTime}</div>
+                    <div className={styles.date}>{item.createTime} <span className={styles.delete} onClick={() => this.deleteItem(item.id)}>删除</span></div>
                     <p className={styles.blog_content}>{item.mainBody}</p>
                     <div className={styles.pic}>
                       <img src={item.blogPic} alt="."></img>

@@ -3811,12 +3811,32 @@ draft-convert@^2.0.0:
     immutable "~3.7.4"
     invariant "^2.2.1"
 
+draft-js-import-element@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/draft-js-import-element/download/draft-js-import-element-1.4.0.tgz#8760acbfeb60ed824a1c8319ec049f702681df66"
+  integrity sha1-h2Csv+tg7YJKHIMZ7ASfcCaB32Y=
+  dependencies:
+    draft-js-utils "^1.4.0"
+    synthetic-dom "^1.4.0"
+
+draft-js-import-html@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.npm.taobao.org/draft-js-import-html/download/draft-js-import-html-1.4.1.tgz#c222a3a40ab27dee5874fcf78526b64734fe6ea4"
+  integrity sha1-wiKjpAqyfe5YdPz3hSa2RzT+bqQ=
+  dependencies:
+    draft-js-import-element "^1.4.0"
+
 draft-js-multidecorators@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/draft-js-multidecorators/download/draft-js-multidecorators-1.0.0.tgz#6c4be8d7b78dd2b966ee51ee6cc179b9b535e612"
   integrity sha1-bEvo17eN0rlm7lHubMF5ubU15hI=
   dependencies:
     immutable "*"
+
+draft-js-utils@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/draft-js-utils/download/draft-js-utils-1.4.0.tgz#c60af198108f69b0f1df3572555b23836819d1cf"
+  integrity sha1-xgrxmBCPabDx3zVyVVsjg2gZ0c8=
 
 draft-js@^0.10.3:
   version "0.10.5"
@@ -10843,6 +10863,11 @@ symbol-tree@^3.2.2:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
+
+synthetic-dom@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/synthetic-dom/download/synthetic-dom-1.4.0.tgz#d988d7a4652458e2fc8706a875417af913e4dd34"
+  integrity sha1-2YjXpGUkWOL8hwaodUF6+RPk3TQ=
 
 table@^5.2.3:
   version "5.4.6"

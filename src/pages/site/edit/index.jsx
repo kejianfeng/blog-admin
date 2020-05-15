@@ -82,10 +82,12 @@ class Edit extends Component {
             <FormItem label="站点分类" name="siteClassify" {...formItemLayout}
               rules={[{ required: true, message: '输入分类' }]}
             >
-              <Select defaultValue="lucy" style={{ width: 120 }}>
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="Yiminghe">yiminghe</Option>
+              <Select defaultValue="design" style={{ width: 120 }}>
+                <Option value="design">设计</Option>
+                <Option value="teach">技术</Option>
+                <Option value="tool">工具</Option>
+                <Option value="material">素材</Option>
+                <Option value="gihub">github高星</Option>
               </Select>
             </FormItem>
             <FormItem label="站点图片"{...formItemLayout}>

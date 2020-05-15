@@ -14,21 +14,17 @@ const formItemLayout = {
   wrapperCol: { span: 12 },
 };
 
-
 // const formInstance = Form.cre
 class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
       articleContent: '我是剑烽',
-      initContent: '' ,//预设值
-      title:'',
-      topic:'',
-      summary:'',
-      labels:''
+      articleId: null
     };
     this.contentUpdate = this.contentUpdate.bind(this);
     this.myRef = React.createRef();
+    this.editor = React.createRef();
   }
   contentUpdate(value) { //文章内容改变
     this.setState({
@@ -36,36 +32,37 @@ class Edit extends Component {
     });
   }
   async formSubmit(value) {
-    const params = Object.assign({}, value, {mainBody:this.state.articleContent, status:2})
-    const result = await request('/article/add','post', params)
+    const {articleId} = this.state
+    const url = articleId ? '/admin/article/update' : '/article/add'
+    const params = Object.assign({}, value, {mainBody:this.state.articleContent, status:1})
+    articleId && (params.id = articleId)
+    const result = await request(url,'post', params)
     if (result.code === 200) {
-      message.success('文章新增成功')
+      message.success(articleId ? '文章修改成功' : '文章新增成功')
       this.props.history.push('/article')
     }
   }
   async getData(id) {
     const data = (await request('/admin/article/detail', 'post', {id})).data
-    console.log(data)
     const {title, topic, summary, labels, mainBody} = data
-
     this.myRef.current.setFieldsValue({
       title,
       topic,
       summary,
       labels,
     })
-    this.setState({
-      initContent: mainBody
-    })
+    this.editor.current.getInitialState(mainBody)
   }
   componentDidMount() {
-    const articleId = this.props.location.state.id
-    articleId && this.getData(articleId)
-    // console.log(this.myRef.current)
+    const articleId = this.props.location.state ? this.props.location.state.id : ''
+    if (articleId) {
+      this.setState({
+        articleId
+      })
+      this.getData(articleId)
+    }
   }
   render() {
-    // console.log('啊啊啊',title)
-    const {initContent} = this.state
     return (
       <div className="container-a">
          <div className="section">
@@ -101,7 +98,7 @@ class Edit extends Component {
             </FormItem>
             <FormItem label="文章内容" name="mainBody" {...formItemLayout}
             >
-            <RichText articleContent={this.state.articleContent} contentUpdate={this.contentUpdate} defaultContent={initContent}/>
+            <RichText articleContent={this.state.articleContent} contentUpdate={this.contentUpdate} ref={this.editor}/>
             </FormItem>
             <FormItem wrapperCol={{ span: 12, offset: 3 }}>
               <Button type="primary" htmlType="submit">

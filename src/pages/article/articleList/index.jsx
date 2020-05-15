@@ -12,6 +12,7 @@ class ArticleList extends Component {
     this.state = {
       articleList:[]
     };
+    this.getList = this.getList.bind(this)
   }
   async getList() {
     const result = await request('/article/articleList', 'get')
@@ -57,7 +58,7 @@ class ArticleList extends Component {
         <div className="container-a">
           <div className="section">
             <div className={styles.table}>
-              <TableBasic articleList={this.state.articleList}/>
+              <TableBasic articleList={this.state.articleList} getList={this.getList}/>
             </div>
           </div>
         </div>

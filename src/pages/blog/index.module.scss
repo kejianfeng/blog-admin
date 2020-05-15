@@ -61,6 +61,13 @@
   .blog_content {
     margin: 10px 0  ;
   }
+  .delete {
+    margin-left: 20px;
+    cursor: pointer;
+    &:hover {
+      color: red;
+    }
+  }
   .pic {
     width: 300px;
     margin: 20px 0;

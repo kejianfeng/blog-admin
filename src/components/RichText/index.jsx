@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import styles from './index.module.scss'
 import 'braft-editor/dist/index.css'
 import BraftEditor from 'braft-editor'
+
 
 class RichText extends Component {
   constructor(props) {
@@ -9,6 +9,12 @@ class RichText extends Component {
     this.state = {
       editorState: this.props.articleContent
     }
+    this.getInitialState = this.getInitialState.bind(this)
+  }
+  getInitialState(value) {
+    this.setState({
+      editorState: BraftEditor.createEditorState(value)
+    })
   }
   handleChange = (editorState) => {
     this.props.contentUpdate(editorState.toHTML())
@@ -17,7 +23,7 @@ class RichText extends Component {
 	render () {
 		return (
 				<div>
-           <BraftEditor value={this.state.editorState} onChange={this.handleChange} defaultValue={BraftEditor.createEditorState(this.props.defaultContent)}/>
+           <BraftEditor value={this.state.editorState} onChange={this.handleChange}/>
 				</div>
 			)
 		
