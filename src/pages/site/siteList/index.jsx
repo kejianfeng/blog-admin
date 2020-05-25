@@ -1,7 +1,7 @@
 // import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import React, { Fragment,Component } from 'react';
-// import { Spin } from 'antd';
 import { Button } from 'antd';
+import { withRouter } from "react-router-dom";
 import styles from './index.module.scss';
 import TableBasic from './TableBasic';
 import request from "../../../utils/request";
@@ -13,11 +13,16 @@ class ArticleList  extends Component {
     this.state = {
       siteList:[]
     };
+    this.getList=this.getList.bind(this)
   }
   async getList() {
     const result = await request('/home/sitelist', 'get')
+    const data = result.data.map( item =>{
+      item.key = item.id
+      return item
+    })
     this.setState({
-      siteList: result.data
+      siteList: data
     })
   }
   componentWillMount() {
@@ -39,7 +44,7 @@ class ArticleList  extends Component {
       <div className="container-a">
         <div className="section">
           <div className={styles.table}>
-            <TableBasic siteList={this.state.siteList}></TableBasic>
+            <TableBasic siteList={this.state.siteList} getList={this.getList}></TableBasic>
           </div>
         </div>
       </div>
@@ -48,4 +53,4 @@ class ArticleList  extends Component {
   }
 }
 
-export default  ArticleList
+export default  withRouter(ArticleList)

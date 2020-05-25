@@ -83,3 +83,28 @@
 .title {
   margin: 10px 0;
 }
+.pic_show {
+  width: 100%;
+  .pic_list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-around;
+    .pic_item {
+      position: relative;
+      width: 30%;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      max-height: 200px;
+      .delete_pic {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

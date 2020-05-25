@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
+import { withRouter } from "react-router-dom";
 import { Table, Divider, Tag, message } from 'antd';
 import request from "../../../../utils/request";
 import styles from './index.module.scss';
-import { withRouter } from "react-router-dom";
 
 class TableBasic extends Component {
   constructor(props) {
@@ -63,7 +63,6 @@ class TableBasic extends Component {
         ),
       },
     ];
-
     this.modify = this.modify.bind(this)
     this.updateStatus = this.updateStatus.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
@@ -96,14 +95,13 @@ class TableBasic extends Component {
       message.success(`已删除`)
       this.props.getList()
     }
-   
-  
   }
   render() {
+    const {articleList} = this.props
     return (
       <div className={styles.container}>
     <div id="components-table-demo-basic">
-      <Table columns={this.columns} dataSource={this.props.articleList} />
+      <Table columns={this.columns} dataSource={articleList} />
     </div>
   </div>
     )

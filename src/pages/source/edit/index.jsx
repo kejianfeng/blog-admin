@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button,Upload, message } from 'antd';
 import request from "../../../utils/request";
+import { withRouter } from "react-router-dom";
 import {ArrowLeftOutlined} from '@ant-design/icons'
 import styles from './index.module.scss';
 
@@ -12,18 +13,27 @@ const formItemLayout = {
   wrapperCol: { span: 12 },
 };
 
-class Edit extends Component {
+class Blog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sourceShoot:''
+      sourceShoot:'',
+      sourceId:null
     }
+    this.myRef = React.createRef();
   }
 
   async formSubmit(value) {
+    const { sourceId } = this.state;
+    const url = sourceId ? "/admin/source/update" : "/admin/source/add";
     const params = Object.assign({}, value, {sourceShoot: this.state.sourceShoot})
-    const result = await request('/source/add', 'post', params)
-    result.code === 200 && message.success('资源添加成功')
+    sourceId && (params.id = sourceId)
+    const result = await request(url, 'post', params)
+    if (result.code === 200 ) {
+      message.success(sourceId ? '资源修改成功' : '资源添加成功')
+      this.props.history.push('/source')
+    }
+
   }
   beforeUpload =  file => { //自定义上传
     const reader = new FileReader();
@@ -45,7 +55,36 @@ class Edit extends Component {
     }
     return false
 
-  };
+  }
+  getSourceId() {
+    const sourceId = this.props.location.state
+      ? this.props.location.state.id
+      : "";
+    if (sourceId) {
+      this.setState({
+        sourceId,
+      });
+      this.getData(sourceId);
+    }
+  }
+  async getData(id) {
+    const data = (await request("/source/detail", "post", { id })).data;
+    const { sourceName, sourceIntro, sourceIcon, sourceLabels, sourceLink , sourcePassword, sourceShoot} = data;
+    this.myRef.current.setFieldsValue({
+      sourceName,
+      sourceIntro,
+      sourceIcon,
+      sourceLabels,
+      sourceLink,
+      sourcePassword
+    });
+    this.setState({
+      sourceShoot
+    })
+  }
+  componentDidMount() {
+    this.getSourceId()
+  }
   render() {
     return (
       <div className="container-a">
@@ -60,7 +99,7 @@ class Edit extends Component {
          </div>
         <div className="section">
         <div className={styles.edit_wrap}>
-          <Form onFinish={this.formSubmit.bind(this)}>
+          <Form onFinish={this.formSubmit.bind(this)} ref={this.myRef}>
             <FormItem label="资源名称" name="sourceName" {...formItemLayout}
               rules={[{ required: true, message: '资源名称啊' }]}
             >
@@ -113,5 +152,5 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+export default withRouter(Blog);
 // export default Edit

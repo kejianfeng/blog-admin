@@ -15,7 +15,7 @@ class ArticleList extends Component {
     this.getList = this.getList.bind(this)
   }
   async getList() {
-    const result = await request('/article/articleList', 'get')
+    const result = await request('/admin/article/articleList', 'get')
     const data = result.data.map( item =>{
       item.labels = item.labels.split(',')
       item.key = item.id

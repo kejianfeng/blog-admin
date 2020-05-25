@@ -23,7 +23,7 @@ class Blog extends Component {
     this.getList();
   }
   async getList() {
-    const result = await request("/blog/blogList", "get");
+    const result = await request("/admin/blog/blogList", "get");
     this.setState({
       articleList: result.data,
     });
