@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Drawer,Tag,Select,message } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import RichText from "../../../components/RichText/index";
+import MarkdownEditor from "../../../components/MarkdownEditor/index";
 import styles from "./index.module.scss";
 import request from "../../../utils/request";
 import { withRouter } from "react-router-dom";
@@ -13,19 +13,21 @@ const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 12 },
 };
+const MarkdownOption = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 20 },
+};
 
 // const formInstance = Form.cre
 class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      articleContent: "我是剑烽",
       articleId: null,
       showDrawer: false,
       editTopic:'',
       topicList:[]
     };
-    this.contentUpdate = this.contentUpdate.bind(this);
     this.manageTopic = this.manageTopic.bind(this);
     this.getArticleId = this.getArticleId.bind(this);
     this.inputChange = this.inputChange.bind(this);
@@ -35,20 +37,17 @@ class Edit extends Component {
     this.myRef = React.createRef();
     this.editor = React.createRef();
   }
-  contentUpdate(value) {
-    //文章内容改变
-    this.setState({
-      articleContent: value,
-    });
-  }
   async formSubmit(value) {
     const { articleId } = this.state;
-    const url = articleId ? "/admin/article/update" : "/article/add";
+    const {html, markdown} = this.editor.current.state
+    const url = articleId ? "/admin/article/update" : "/admin/article/add";
     const params = Object.assign({}, value, {
-      mainBody: this.state.articleContent,
+      mainBody: html,
+      markdown: encodeURIComponent(markdown),
       status: 1,
     });
     articleId && (params.id = articleId);
+    console.log('参数', params)
     const result = await request(url, "post", params);
     if (result.code === 200) {
       message.success(articleId ? "文章修改成功" : "文章新增成功");
@@ -57,14 +56,16 @@ class Edit extends Component {
   }
   async getData(id) {
     const data = (await request("/admin/article/detail", "post", { id })).data;
-    const { title, topic, summary, labels, mainBody } = data;
+    const { title, topic, summary, labels, markdown } = data;
     this.myRef.current.setFieldsValue({
       title,
       topic,
       summary,
       labels,
     });
-    this.editor.current.getInitialState(mainBody);
+    console.log('这里没值？', markdown)
+    this.editor.current.setInitData(markdown);
+    // this.editor.current.setText(mainBody, markdown);
   }
   manageTopic() {
     this.setState({
@@ -183,13 +184,16 @@ class Edit extends Component {
               >
                 <Input />
               </FormItem>
-              <FormItem label="文章内容" name="mainBody" {...formItemLayout}>
+              <FormItem label="文章内容" name="mainBody" {...MarkdownOption}>
+               <MarkdownEditor ref={this.editor}></MarkdownEditor>
+              </FormItem>
+              {/* <FormItem label="文章内容" name="mainBody" {...formItemLayout}>
                 <RichText
                   articleContent={this.state.articleContent}
                   contentUpdate={this.contentUpdate}
                   ref={this.editor}
                 />
-              </FormItem>
+              </FormItem> */}
               <FormItem wrapperCol={{ span: 12, offset: 3 }}>
                 <Button type="primary" htmlType="submit">
                   提交

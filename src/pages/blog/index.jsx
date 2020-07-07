@@ -9,7 +9,7 @@ class Blog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blogPic: null,
+      blogPic: "",
       mainBody: "",
       labels: "",
       articleList: []
