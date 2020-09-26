@@ -1,0 +1,40 @@
+// .login-container {
+//   width: 100vw;
+//   height: 100vh;
+
+// }
+
+$bg:#283443;
+$light_gray:#fff;
+$cursor: #fff;
+
+// @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
+//   .login-container .el-input input {
+//     color: $cursor;
+//   }
+// }
+
+/* reset element-ui css */
+.login_container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: url(https://image.jianfengke.com/login-background.png) no-repeat center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  .login_form {
+    padding: 100px;
+    background: url(https://image.jianfengke.com/login-form.937224d9.png) no-repeat center;
+    background-size: contain;
+    .title_container {
+      .title {
+        color: #fff;
+        text-align: center;
+        font-size: 40px;
+      }
+    }
+  }
+}

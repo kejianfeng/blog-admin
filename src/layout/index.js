@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./index.module.scss";
 import { BrowserRouter as Router, Route, Switch,withRouter} from "react-router-dom";
+import Login from "../pages/login";
 import article from '../pages/article/articleList/index';
 import articleEdit from '../pages/article/edit/index';
 import blog from '../pages/blog/index';
@@ -22,6 +23,7 @@ class Layout extends Component {
   render() {
     return (
      <Router>
+        <Route  path="/login" component={Login}></Route >
         <div className={styles.layout_box}>
         <HeadBar></HeadBar>
         <SideBar></SideBar>
@@ -38,8 +40,8 @@ class Layout extends Component {
               <Route  path="/article/edit" component={articleEdit}></Route >
               <Route  path="/site/edit" component={siteEdit}></Route >
             </Switch>
+          </div>
         </div>
-      </div>
      </Router>
     );
   }

@@ -8,7 +8,7 @@ $size: (
   }
 };
 
-@each $val in (5,10,20, 30, 40, 50 ) {
+@each $val in (5,10,20, 30, 40, 50, 70 ) {
   .mt#{$val} {
     margin-top: #{$val}px;
   }

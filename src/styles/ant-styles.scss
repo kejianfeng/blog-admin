@@ -1,0 +1,23 @@
+[class^="login_"] {
+  .ant-row {
+    width: 300px;
+    .ant-form-item-control-input {
+      input {
+        background: transparent;
+        color: #eee;
+      }
+    }
+    .ant-form-item-label {
+      label {
+        color: #fff !important;
+      }
+    }
+  }
+  .ant-btn-primary {
+    background-color: #00fcfc !important;
+    border: 1px solid #00eaff;
+    span {
+      color:#010a16 ;
+    }
+  }
+}

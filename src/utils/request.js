@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {message} from 'antd'
 
+
 const service = axios.create({
   baseURL: '/api',
   timeout: 5000,
@@ -20,11 +21,18 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-    if (res.code !== 200) {
-      message.error(res.message)
-      return false
-    } else {
-      return res
+    switch (res.code) {
+      case 401:
+        message.error(res.message)
+        console.log('就这啊')
+        // RedirectComponent();
+        window.location.href = '/login'
+        return false;
+      case 200:
+        return res;
+      default:
+        message.error(res.message)
+        return res
     }
   },
   error => {
