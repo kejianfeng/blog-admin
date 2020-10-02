@@ -33,7 +33,6 @@ class Edit extends Component {
   async getData(id) {
     const data = (await request("/admin/site/detail", "post", { id })).data;
     const { siteName, siteUrl, siteText, classify,sitePic } = data;
-    console.log(data)
     this.myRef.current.setFieldsValue({
       siteName,
       siteUrl,
@@ -118,7 +117,6 @@ class Edit extends Component {
       const result = await request("/upload", 'post', {file: e.target.result}).catch(err => {
         message.error('上传出错')
       })
-      // console.log(result)
       if (result.code === 200) {
         this.setState({
           sitePic: result.data.picUrl

@@ -42,7 +42,6 @@ class Blog extends Component {
       const result = await request("/upload", 'post', {file: e.target.result}).catch(err => {
         message.error('上传出错')
       })
-      // console.log(result)
       if (result.code === 200) {
         this.setState({
           sourceShoot: result.data.picUrl

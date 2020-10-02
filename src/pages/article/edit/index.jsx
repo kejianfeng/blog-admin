@@ -47,7 +47,6 @@ class Edit extends Component {
       status: 1,
     });
     articleId && (params.id = articleId);
-    console.log('参数', params)
     const result = await request(url, "post", params);
     if (result.code === 200) {
       message.success(articleId ? "文章修改成功" : "文章新增成功");
@@ -63,7 +62,6 @@ class Edit extends Component {
       summary,
       labels,
     });
-    console.log('这里没值？', markdown)
     this.editor.current.setInitData(markdown);
     // this.editor.current.setText(mainBody, markdown);
   }

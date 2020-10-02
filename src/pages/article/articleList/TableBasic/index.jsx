@@ -75,7 +75,6 @@ class TableBasic extends Component {
         id
       }
     })
-    console.log(this)
   }
   async updateStatus(id, status) {
    const result = await request('/admin/article/updateStatus', 'post', {

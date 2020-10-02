@@ -24,8 +24,6 @@ service.interceptors.response.use(
     switch (res.code) {
       case 401:
         message.error(res.message)
-        console.log('就这啊')
-        // RedirectComponent();
         window.location.href = '/login'
         return false;
       case 200:

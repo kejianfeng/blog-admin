@@ -38,7 +38,6 @@ class Blog extends Component {
       }).catch((err) => {
         message.error("上传出错");
       });
-      // console.log(result)
       if (result.code === 200) {
         this.setState({
           blogPic: result.data.picUrl,
@@ -82,7 +81,6 @@ class Blog extends Component {
   }
 
   render() {
-    console.log('万丈拉', this.state.articleList)
     return (
       <Fragment>
         <div className="container-a">

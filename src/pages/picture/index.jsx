@@ -31,7 +31,6 @@ class Picworks extends Component {
       }).catch((err) => {
         message.error("上传出错");
       });
-      // console.log(result)
       if (result.code === 200) {
         this.setState({
           picture: result.data.picUrl,

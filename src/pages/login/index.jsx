@@ -16,7 +16,6 @@ const Login = (props) => {
     } else {
       message.success('登录失败')
     }
-    // console.log(result)
   };
   return (
   <div className={styles.login_container}>
